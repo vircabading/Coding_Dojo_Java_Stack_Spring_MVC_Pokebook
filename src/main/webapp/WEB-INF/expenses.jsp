@@ -45,11 +45,40 @@
 								<th scope="col">Amount</th>
 							</tr>
 						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>${ name }</td>
+								<td>${ vendor }</td>
+								<td>${ amount }</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
 			<br>
-			
+			<h1>
+				Track an Expense:
+			</h1>
+			<form class="col" action="/expenses" method="post">
+				<div class="form-group mb-2">
+					<label class="form-label" for="name">Expense Name:</label>
+					 <input class="form-control" type="text" id="name" name="name" 
+				</div>
+				<div class="form-group mb-2">
+					<label class="form-label" for="vendor">Vendor:</label>
+					 <input class="form-control" type="text" id="vendor" name="vendor">
+				</div>
+				<div class="form-group mb-2">
+					<label class="form-label" for="amount">$ Amount:</label>
+					 <input class="form-control" type="number" id="amount" name="amount">
+				</div>
+				<div class="form-group mb-2">
+					<label for="description">Description:</label>
+					<textarea class="form-control" id="description" name="description" rows="3"></textarea>
+				</div>
+				<input class="btn btn-primary" type="submit">
+			</form>
 		</div>
 	</main>
 
