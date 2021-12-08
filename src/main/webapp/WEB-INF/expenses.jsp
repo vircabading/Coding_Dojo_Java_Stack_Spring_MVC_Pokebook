@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--/////////////////////////////////////////////////////
 //	EXPENSES JSP
@@ -46,12 +47,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>${ name }</td>
-								<td>${ vendor }</td>
-								<td>${ amount }</td>
-							</tr>
+							<c:forEach var="expense" items="${ expenses }">
+								<td>${ expense.id }</td>
+								<td>${ expense.name }</td>
+								<td>${ expense.vendor }</td>
+								<td><fmt:formatNumber value="${expense.amount}" type="currency"/></td>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -63,7 +64,7 @@
 			<form class="col" action="/expenses" method="post">
 				<div class="form-group mb-2">
 					<label class="form-label" for="name">Expense Name:</label>
-					 <input class="form-control" type="text" id="name" name="name" 
+					 <input class="form-control" type="text" id="name" name="name" >
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label" for="vendor">Vendor:</label>
@@ -71,7 +72,7 @@
 				</div>
 				<div class="form-group mb-2">
 					<label class="form-label" for="amount">$ Amount:</label>
-					 <input class="form-control" type="number" id="amount" name="amount">
+					 <input class="form-control" type="number" id="amount" name="amount" min="0.01" step="0.01">
 				</div>
 				<div class="form-group mb-2">
 					<label for="description">Description:</label>

@@ -1,5 +1,7 @@
 package com.vcabading.pokebook.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vcabading.books.service.BookService;
+import com.vcabading.pokebook.models.Expense;
 import com.vcabading.pokebook.services.ExpenseService;
 
 /////////////////////////////////////////////////////////////
-//	EXPENSES CONTROLLER
+//	EXPENSE CONTROLLER
 /////////////////////////////////////////////////////////////
 
 @Controller
@@ -32,13 +34,17 @@ public class ExpenseController {
 	public String expensesPost(
 			@RequestParam("name") String name,
 			@RequestParam("vendor") String vendor,
-			@RequestParam("amount") float amount,
+			@RequestParam("amount") double amount,
 			@RequestParam("description") String description,
 			HttpSession session) {
 		session.setAttribute("name", name);
 		session.setAttribute("vendor", vendor);
 		session.setAttribute("amount", amount);
 		session.setAttribute("description", description);
+		
+		if (name.length()>0 && vendor.length()>0 && description.length()>0 && amount > 0) {
+			this.expService.createExpense(name, vendor, amount, description);
+		}
 		return "redirect:/expenses";
 	}
 	//	//// RETRIEVE ///////////////////////////////////////
@@ -46,7 +52,7 @@ public class ExpenseController {
 	@GetMapping("")
 	public String expenses(Model model) {
 		List<Expense> expenses = this.expService.getAll();
-		model.addAllAttributes("expenses",expenses);
+		model.addAttribute("expenses",expenses);
 		return "expenses.jsp";
 	}
 	

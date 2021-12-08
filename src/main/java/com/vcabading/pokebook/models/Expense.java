@@ -28,7 +28,7 @@ public class Expense {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long ID;
+	private long id;
 	
 	@NotNull
 	@Size(min=1, max=200, message="must enter a name")
@@ -40,10 +40,10 @@ public class Expense {
 	
 	@NotNull
 	@Min(value=1, message="amount must be at least 1")
-	private float amount;
+	private double amount;
 
 	@NotNull
-	@Size(min=1, max=400, message="must enter a description")
+	@Size(min=1, max=800, message="must enter a description")
 	private String description;
 	
 	@Column(updatable=false)		// this will not allow createdAt to be updated after creation
@@ -60,7 +60,7 @@ public class Expense {
 	public Expense() {
 	}
 	
-	public Expense(String name, String vendor, float amount, String description) {
+	public Expense(String name, String vendor, double amount, String description) {
 		this.name = name;
 		this.vendor = vendor;
 		this.amount = amount;
@@ -76,15 +76,15 @@ public class Expense {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
-	//	//// GETTERS AND SETTERS //////////////////////////////
 
-	public long getID() {
-		return ID;
+	//	//// GETTERS AND SETTERS //////////////////////////////
+	
+	public long getId() {
+		return id;
 	}
 
-	public void setID(long iD) {
-		ID = iD;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -103,11 +103,11 @@ public class Expense {
 		this.vendor = vendor;
 	}
 
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
@@ -134,6 +134,10 @@ public class Expense {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+
+
+
 	
 	
 }
