@@ -19,5 +19,5 @@ public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 	
 	Expense findByID(Long id);
 	
-	Expense deleteByID(Long id);
+	Expense deleteByID(Long id);	
 }
