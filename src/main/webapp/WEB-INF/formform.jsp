@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!--/////////////////////////////////////////////////////
-//	EXPENSES JSP
+//	FORM FORM JSP
 ///////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
 <!-- ---- CSS LINKS --------------------------------- -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<title>Pokebook</title>
+<title>Pokebook FORM:FORM</title>
 </head>
 <body>
 	<!-- //// HEADER //////// -->
@@ -48,38 +49,46 @@
 						</thead>
 						<tbody>
 							<c:forEach var="expense" items="${ expenses }">
-								<td>${ expense.id }</td>
-								<td>${ expense.name }</td>
-								<td>${ expense.vendor }</td>
-								<td><fmt:formatNumber value="${expense.amount}" type="currency"/></td>
+								<tr>
+									<td>${ expense.id }</td>
+									<td>${ expense.name }</td>
+									<td>${ expense.vendor }</td>
+									<td><fmt:formatNumber value="${expense.amount}"
+											type="currency" /></td>
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<br>
-			<h1>
-				Track an Expense:
-			</h1>
-			<form class="col" action="/expenses" method="post">
-				<div class="form-group mb-2">
-					<label class="form-label" for="name">Expense Name:</label>
-					 <input class="form-control" type="text" id="name" name="name" >
-				</div>
-				<div class="form-group mb-2">
-					<label class="form-label" for="vendor">Vendor:</label>
-					 <input class="form-control" type="text" id="vendor" name="vendor">
-				</div>
-				<div class="form-group mb-2">
-					<label class="form-label" for="amount">$ Amount:</label>
-					 <input class="form-control" type="number" id="amount" name="amount" min="0.01" step="0.01">
-				</div>
-				<div class="form-group mb-2">
-					<label for="description">Description:</label>
-					<textarea class="form-control" id="description" name="description" rows="3"></textarea>
-				</div>
-				<input class="btn btn-primary" type="submit">
-			</form>
+			<div class="col bg-info p-3">
+				<h1>Track an Expense:</h1>
+				<form:form action="/expenses" method="post" modelAttribute="expense">
+					<p class="form-group">
+						<form:label path="name">Expense name:</form:label>
+						<form:input class="form-control mb-3" path="name" />
+						<form:errors path="name" class="alert alert-danger" />
+					</p>
+					<p class="form-group">
+						<form:label path="vendor">Vendor:</form:label>
+						<form:input class="form-control mb-3" path="vendor" />
+						<form:errors path="vendor" class="alert alert-danger" />
+					</p>
+					<p class="form-group">
+						<form:label path="amount">Amount in $</form:label>
+						<form:input class="form-control mb-3" type="number" path="amount"
+							min="0.01" step="0.01" />
+						<form:errors path="amount" class="alert alert-danger" />
+					</p>
+					<p class="form-group">
+						<form:label path="description">Description</form:label>
+						<form:textarea class="form-control mb-3" path="description" />
+						<form:errors path="description" class="alert alert-danger" />
+					</p>
+					<input class="btn btn-success" type="submit" value="Submit" />
+				</form:form>
+			</div>
 		</div>
 	</main>
 
