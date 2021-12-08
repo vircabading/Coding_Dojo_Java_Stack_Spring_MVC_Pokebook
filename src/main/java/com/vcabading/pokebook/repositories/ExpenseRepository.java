@@ -17,5 +17,7 @@ public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 	//	---- Retrieves all books -------------------------------
 	List<Expense> findAll();
 	
-	List<Expense> 
+	Expense findByID(Long id);
+	
+	Expense deleteByID(Long id);
 }
