@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,7 +76,7 @@ public class ExpenseController {
 	//	//// UPDATE //////////////////////////////////////////
 	
 	@PutMapping("/{id}/edit")
-	public String expensesPost(	@Valid @ModelAttribute("expense") Expense expense,
+	public String expensesIdEdit(	@Valid @ModelAttribute("expense") Expense expense,
 								BindingResult result, Model model,
 								@PathVariable("id") Long id) {
 		if (result.hasErrors()) {									// If has errors
@@ -86,6 +87,14 @@ public class ExpenseController {
         	this.expService.updateExpense(id, expense.getName(), expense.getVendor(), expense.getAmount(), expense.getDescription());
             return "redirect:/expenses/" + expense.getId();
         }
+	}
+	
+	//	//// DELETE //////////////////////////////////////////
+	
+	@DeleteMapping("/{id}/delete")
+	public String expensesIdDelete(@PathVariable("id") Long id, Model model) {
+		this.expService.deleteExpenseByID(id);
+		return "redirect:/expenses";
 	}
 	
 }

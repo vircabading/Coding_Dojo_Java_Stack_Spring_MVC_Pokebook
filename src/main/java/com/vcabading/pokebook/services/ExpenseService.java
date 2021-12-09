@@ -75,7 +75,7 @@ public class ExpenseService {
 	//	//// DELETE /////////////////////////////////
 	
 	public void deleteExpenseByID(Long id) {
-		this.expenseRepo.existsById(id);
+		this.expenseRepo.deleteById(id);
 	}
 	
 	
