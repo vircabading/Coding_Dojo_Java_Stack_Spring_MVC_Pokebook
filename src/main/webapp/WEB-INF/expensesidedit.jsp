@@ -62,12 +62,12 @@
 						<form:textarea class="form-control mb-3" path="description" />
 						<form:errors path="description" class="alert alert-danger" />
 					</p>
-					<input class="btn btn-success" type="submit" value="Submit" />
+					<input class="btn btn-success" type="submit" value="Submit Edit" />
 				</form:form>
+				
 			</div>
 		</div>
 	</main>
-
 
 	<!-- ---- JAVASCRIPT LINKS ---------------------------- -->
 	<script src="/webjars/jquery/jquery.min.js"></script>

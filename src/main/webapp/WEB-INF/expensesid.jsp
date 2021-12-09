@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		<!-- USE C:OUT -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	<!-- USE FORMAT DATE/ CURRENCY -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>	<!-- USE FORM:FORM -->
-<%@ page isErrorPage="true" %>										<!-- USE FLASH ERRORS -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- USE C:OUT -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- USE FORMAT DATE/ CURRENCY -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!-- USE FORM:FORM -->
+<%@ page isErrorPage="true"%>
+<!-- USE FLASH ERRORS -->
 
 <!--/////////////////////////////////////////////////////
 //	EXPENSE ID JSP
@@ -34,7 +38,7 @@
 
 	<!-- //// MAIN AREA //////// -->
 	<main role="main">
-		<div class="container mt-4 bg-info rounded">
+		<div class="container mt-4 bg-info rounded p-2">
 			<h1>Expense Details:</h1>
 			<div class="row mb-3">
 				<div class="col-3">
@@ -62,11 +66,19 @@
 				</div>
 				<div class="col-8">${ expense.description }</div>
 			</div>
-			
-			<!-- **** Button that points to Expense Edit ************ -->
-			<form action="/expenses/${ expense.id }/edit" method="get">				
-				<button class="btn btn-warning">Edit</button>
-			</form>
+			<div class="row">
+				<!-- **** Button that points to Expense Edit ************ -->
+				<form class="col-1 me-2"action="/expenses/${ expense.id }/edit" method="get">
+					<button class="btn btn-warning">Edit</button>
+				</form>
+
+				<!-- **** Button that deletes Expense ************ -->
+				<form class="col-1" action="/expenses/${ expense.id }/delete" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<!-- ### Converts method of form to DELETE ### -->
+					<button class="btn btn-danger">Delete</button>
+				</form>
+			</div>
 		</div>
 	</main>
 
