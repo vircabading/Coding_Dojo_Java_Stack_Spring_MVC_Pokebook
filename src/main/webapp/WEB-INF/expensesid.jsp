@@ -34,10 +34,8 @@
 
 	<!-- //// MAIN AREA //////// -->
 	<main role="main">
-		<div class="container mt-4">
-			<div>
-				<h1>Expense Details:</h1>
-			</div>
+		<div class="container mt-4 bg-info rounded">
+			<h1>Expense Details:</h1>
 			<div class="row mb-3">
 				<div class="col-3">
 					<strong> Expense name: </strong>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vcabading.pokebook.models.Expense;
@@ -69,6 +70,22 @@ public class ExpenseController {
 		Expense expense = this.expService.findExpenseByID(id);
 		model.addAttribute("expense", expense);
 		return "expensesidedit.jsp";
+	}
+	
+	//	//// UPDATE //////////////////////////////////////////
+	
+	@PutMapping("/{id}/edit")
+	public String expensesPost(	@Valid @ModelAttribute("expense") Expense expense,
+								BindingResult result, Model model,
+								@PathVariable("id") Long id) {
+		if (result.hasErrors()) {									// If has errors
+			expense = this.expService.findExpenseByID(id);	// 		Get Expense by ID
+			model.addAttribute("expense", expense);					//		to re-populate edit form
+            return "expensesidedit.jsp";
+        } else {													// ELSE Update Expense Name, Vendor, Amount, Description
+        	this.expService.updateExpense(id, expense.getName(), expense.getVendor(), expense.getAmount(), expense.getDescription());
+            return "redirect:/expenses/" + expense.getId();
+        }
 	}
 	
 }
