@@ -6,7 +6,7 @@
 <%@ page isErrorPage="true" %>										<!-- USE FLASH ERRORS -->
 
 <!--/////////////////////////////////////////////////////
-//	FORM FORM JSP
+//	EXPENSES ID EDIT JSP
 ///////////////////////////////////////////////////////// -->
 
 <!DOCTYPE html>
@@ -35,56 +35,27 @@
 	<!-- //// MAIN AREA /////////////////////////////////////////////// -->
 	<main role="main">
 		<div class="container mt-4">
-			<h1>Expenses</h1>
-			<br>
-			<!-- //// ALL EXPENSES TABLE ////////////////////////////// -->
-			<div class="row card bg-dark">
-				<div class="col">
-					<table class="table table-dark">
-						<thead>
-							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Expense</th>
-								<th scope="col">Vendor</th>
-								<th scope="col">Amount</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="expense" items="${ expenses }">
-								<tr>
-									<td>${ expense.id }</td>
-									<td><a href="/expenses/${ expense.id }">${ expense.name }</a></td>
-									<td>${ expense.vendor }</td>
-									<td><fmt:formatNumber value="${expense.amount}"
-											type="currency" /></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<br>
 			<div class="col bg-info p-3">
-				<h1>Track an Expense:</h1>
-				<!-- //// CREATE FORM ////////////////////////////////// -->
-				<form:form action="/expenses" method="post" modelAttribute="expense">
-					<p class="form-group">
+				<h1>EDIT an Expense:</h1>
+				<!-- //// EDIT FORM /////////////////////////////////// -->
+				<form:form action="/expenses/{${ expense.id }/edit" method="post" modelAttribute="expense">
+					<p class="form-group">							<!-- **** NAME **** -->
 						<form:label path="name">Expense name:</form:label>
 						<form:input class="form-control mb-3" path="name" />
 						<form:errors path="name" class="alert alert-danger" />
 					</p>
-					<p class="form-group">
+					<p class="form-group">							<!-- **** VENDOR **** -->
 						<form:label path="vendor">Vendor:</form:label>
 						<form:input class="form-control mb-3" path="vendor" />
 						<form:errors path="vendor" class="alert alert-danger" />
 					</p>
-					<p class="form-group">
+					<p class="form-group">							<!-- **** AMOUNT **** -->
 						<form:label path="amount">Amount in $</form:label>
 						<form:input class="form-control mb-3" type="number" path="amount"
 							min="0.01" step="0.01" />
 						<form:errors path="amount" class="alert alert-danger" />
 					</p>
-					<p class="form-group">
+					<p class="form-group">							<!-- **** DESCRIPTION **** -->
 						<form:label path="description">Description</form:label>
 						<form:textarea class="form-control mb-3" path="description" />
 						<form:errors path="description" class="alert alert-danger" />

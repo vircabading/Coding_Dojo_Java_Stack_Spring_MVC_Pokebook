@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.vcabading.pokebook.models.Expense;
 import com.vcabading.pokebook.services.ExpenseService;
@@ -30,7 +30,7 @@ public class ExpenseController {
 	@Autowired
 	ExpenseService expService;
 	
-	//	//// POST ///////////////////////////////////////////
+	//	//// CREATE //////////////////////////////////////////
 	
 	@PostMapping("")
 	public String expensesPost(@Valid @ModelAttribute("expense") Expense expense,
@@ -44,12 +44,31 @@ public class ExpenseController {
             return "redirect:/expenses";
         }
 	}
+	
 	//	//// RETRIEVE ///////////////////////////////////////
 	
+	// 	**** Get All ****************************************
 	@GetMapping("")
 	public String expenses(@ModelAttribute("expense") Expense expense, Model model) {
 		List<Expense> expenses = this.expService.getAll();
 		model.addAttribute("expenses",expenses);
 		return "formform.jsp";
 	}
+	
+	//	**** Get One by ID **********************************
+	@GetMapping("/{id}")
+	public String expensesID(@PathVariable("id") Long id, Model model) {
+		Expense expense = this.expService.findExpenseByID(id);
+		model.addAttribute("expense", expense);
+		return "expensesid.jsp";
+	}
+	
+	//	**** Get One by ID to SHOW EDIT FORM ****************
+	@GetMapping("/{id}/edit")
+	public String expensesIDEdit(@PathVariable("id") Long id, Model model) {
+		Expense expense = this.expService.findExpenseByID(id);
+		model.addAttribute("expense", expense);
+		return "expensesidedit.jsp";
+	}
+	
 }
