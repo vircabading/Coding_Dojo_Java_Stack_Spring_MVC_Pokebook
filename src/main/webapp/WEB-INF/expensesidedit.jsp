@@ -38,7 +38,6 @@
 			<div class="col bg-info p-3">
 				<h1>EDIT an Expense:</h1>
 				<!-- //// EDIT FORM /////////////////////////////////// -->
-				<h2 class="alert alert-warning">${ message }</h2>
 				<form:form action="/expenses/${ expense.id }/edit" method="post" modelAttribute="expense">
 					<input type="hidden" name="_method" value="put">	<!-- ### Converts method of form to PUT ### -->
 					<p class="form-group">							<!-- **** NAME **** -->

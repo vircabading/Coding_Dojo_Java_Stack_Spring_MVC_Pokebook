@@ -80,8 +80,8 @@ public class ExpenseController {
 								BindingResult result, Model model,
 								@PathVariable("id") Long id) {
 		if (result.hasErrors()) {									// If has errors
-			expense = this.expService.findExpenseByID(id);	// 		Get Expense by ID
-			model.addAttribute("expense", expense);					//		to re-populate edit form
+//			expense = this.expService.findExpenseByID(id);	// 		Get Expense by ID
+//			model.addAttribute("expense", expense);					//		to re-populate edit form
             return "expensesidedit.jsp";
         } else {													// ELSE Update Expense Name, Vendor, Amount, Description
         	this.expService.updateExpense(id, expense.getName(), expense.getVendor(), expense.getAmount(), expense.getDescription());
